@@ -35,6 +35,7 @@ cp -rv ./tmp/fa/textures ./gamedata/textures
 cp -rv ./tmp/fa/units ./gamedata/units
 cp -rv ./tmp/fa/etc ./gamedata/etc
 
+cp -rv ./tmp/fa/changelog.md ./changelog.md
 
 echo "copy SupComDataPath"
 cp ./builder/init_TEMPLATE.lua ./bin/SupComDataPath.lua
