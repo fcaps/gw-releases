@@ -41,4 +41,36 @@ cp ./builder/init_TEMPLATE.lua ./bin/SupComDataPath.lua
 
 rm -rf tmp
 
-echo "finished"
+
+
+git fetch --tags
+
+# Get the current branch name
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+# Get the latest tag name for the current branch
+latest_tag=$(git tag --list "*-${branch_name}" | sort -V | tail -n 1)
+
+# Extract the current version number, assume the tag name is in 'vX.Y.Z' format
+version="${latest_tag%-*}"
+version="${version#v}"
+
+# Split the version into components
+IFS='.' read -r major minor patch <<< "${version}"
+
+# Increment the appropriate version component
+# This example increments the minor version; adjust to suit your versioning scheme
+minor=$((minor + 1))
+
+# Construct the new version number
+new_version="v${major}.${minor}.0-${branch_name}"
+
+git add .
+git commit -a -m "release ${new_version}"
+git push origin
+
+# Create the new tag
+git tag "${new_version}"
+
+# Push the new tag to the remote repository
+git push origin "${new_version}"

@@ -1,1 +1,0 @@
-ForgedAlliance.exe /log "dev.log" /prefs "/gw_Al.prefs" /nobugreport
