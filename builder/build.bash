@@ -17,7 +17,7 @@ rm -rf bin/*
 mkdir tmp
 
 
-curl -L -o tmp/ForgedAlliance.exe https://github.com/fcaps/FA-Binary-Patches/releases/download/master-ce827379/ForgedAlliance.exe
+curl -L -o bin/ForgedAlliance.exe https://github.com/fcaps/FA-Binary-Patches/releases/download/master-ce827379/ForgedAlliance.exe
 
 git clone --branch deploy/faf --single-branch --depth 1 git@github.com:FAForever/fa.git tmp/fa
 
