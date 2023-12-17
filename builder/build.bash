@@ -61,10 +61,10 @@ IFS='.' read -r major minor patch <<< "${version}"
 
 # Increment the appropriate version component
 # This example increments the minor version; adjust to suit your versioning scheme
-minor=$((minor + 1))
+minor=$((patch + 1))
 
 # Construct the new version number
-new_version="v${major}.${minor}.0-${branch_name}"
+new_version="v${major}.${minor}.${patch}-${branch_name}"
 
 git add .
 git commit -a -m "release ${new_version}"
