@@ -40,38 +40,54 @@ cp -rv ./tmp/fa/changelog.md ./changelog.md
 echo "copy SupComDataPath"
 cp ./builder/init_TEMPLATE.lua ./bin/SupComDataPath.lua
 
-rm -rf tmp
-
-
-
 git fetch --tags
 
 # Get the current branch name
 branch_name=$(git rev-parse --abbrev-ref HEAD)
 
 # Get the latest tag name for the current branch
-latest_tag=$(git tag --list "*-${branch_name}" | sort -V | tail -n 1)
+latest_tag=$(git tag -l "*-${branch_name}" | sort -t. -k 1,1n -k 2,2n -k 3,3n | tail -n 1)
 
-# Extract the current version number, assume the tag name is in 'vX.Y.Z' format
-version="${latest_tag%-*}"
-version="${version#v}"
+echo $latest_tag
 
-# Split the version into components
+# Extract the current version number, assume the tag name is in format vX.Y.Z-<branch_name>
+if [ -n "$latest_tag" ]; then
+    version="${latest_tag%-*}" # remove branch name suffix
+    version="${version#v}"     # remove "v" prefix
+else
+    version="0.0.0"
+fi
+
+# Split the version into parts
 IFS='.' read -r major minor patch <<< "${version}"
 
-# Increment the appropriate version component
-# This example increments the minor version; adjust to suit your versioning scheme
-minor=$((patch + 1))
+# If major version is not a number, set it to 0
+if ! [[ $major =~ ^[0-9]+$ ]]; then
+    major=0
+fi
+
+# Increment the minor version; adjust per your version scheme
+minor=$((minor + 1))
 
 # Construct the new version number
-new_version="v${major}.${minor}.${patch}-${branch_name}"
+new_version="v${major}.${minor}.0-${branch_name}"
 
-git add .
-git commit -a -m "release ${new_version}"
-git push origin
+# Confirm version name
+read -p "Going to create new git tag: ${new_version}, continue (y/n)? " -n 1 -r
+echo # new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    git add .
+    git commit -a -m "release ${new_version}"
+    git push origin
 
-# Create the new tag
-git tag "${new_version}"
+    # If user confirms, create the new tag
+    git tag "${new_version}"
+    # Push the new tag to remote repository
+    git push origin "${new_version}"
+else
+    echo "Tag creation cancelled."
+    exit 1
+fi
 
-# Push the new tag to the remote repository
-git push origin "${new_version}"
+rm -rf tmp
+
