@@ -1,0 +1,40 @@
+PropBlueprint {
+    Categories = {
+        'INVULNERABLE',
+        'OBSTRUCTSBUILDING'
+    },
+    Defense = {
+        Health = 50,
+        MaxHealth = 50,
+    },
+    Display = {
+        Mesh = {
+            IconFadeInZoom = 4,
+            LODs = {
+                {
+                    -- share other rock's albedo and specteam
+                    LODCutoff = 3000,
+                    ShaderName = 'NormalMappedAlpha',
+                },
+            },
+        },
+        UniformScale = 0.09,
+    },
+    Economy = {
+        ReclaimEnergyMax = 1,
+        ReclaimMassMax = 1,
+        ReclaimTime = 1,
+    },
+    Footprint = {
+        OccupancyCaps = 3,
+    },
+    Interface = {
+        HelpText = 'Huge Rock',
+    },
+    Physics = {
+        BlockPath = true,
+    },
+    SizeX = 34,
+    SizeY = 9,
+    SizeZ = 22,
+}

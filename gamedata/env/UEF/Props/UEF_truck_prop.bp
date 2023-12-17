@@ -1,0 +1,35 @@
+PropBlueprint {
+    Categories = {
+        'RECLAIMABLE',
+        'OBSTRUCTSBUILDING'
+    },
+    Defense = {
+        Health = 50,
+        MaxHealth = 50,
+    },
+    Display = {
+        Mesh = {
+            IconFadeInZoom = 4,
+            LODs = {
+                {
+                    AlbedoName = 'UEF_truck_Albedo.dds',
+                    SpecName = 'UEF_truck_SpecTeam.dds',
+                    LODCutoff = 750,
+                    ShaderName = 'Unit',
+                },
+            },
+        },
+        UniformScale = 0.2,
+    },
+    Economy = {
+        ReclaimEnergyMax = 0,
+        ReclaimMassMax = 150,
+        ReclaimTime = 5,
+    },
+    Interface = {
+        HelpText = 'UEF Truck',
+    },
+    SizeX = 1,
+    SizeY = 0.5,
+    SizeZ = 1.5,
+}
