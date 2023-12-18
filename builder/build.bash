@@ -77,11 +77,11 @@ read -p "Going to create new git tag: ${new_version}, continue (y/n)? " -n 1 -r
 echo # new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     git add .
-    git commit -a -m "release ${new_version}"
+    git commit -S -a -m "release ${new_version}"
     git push origin
 
     # If user confirms, create the new tag
-    git tag -a "${new_version}" -m "release tag ${new_version}"
+    git tag -S -a "${new_version}" -m "release tag ${new_version}"
     # Push the new tag to remote repository
     git push origin "${new_version}"
 else
