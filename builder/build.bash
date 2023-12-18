@@ -81,7 +81,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     git push origin
 
     # If user confirms, create the new tag
-    git tag "${new_version}"
+    git tag -a "${new_version}" -m "release tag ${new_version}"
     # Push the new tag to remote repository
     git push origin "${new_version}"
 else
