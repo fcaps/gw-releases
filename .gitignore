@@ -2,3 +2,7 @@
 
 fa_path.lua
 tmp
+
+bin/BugSplat.dll
+bin/dev.log
+bin/dev_windows.bat
