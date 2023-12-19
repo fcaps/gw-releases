@@ -70,7 +70,7 @@ fi
 minor=$((minor + 1))
 
 # Construct the new version number
-new_version="v${major}.${minor}.1-${branch_name}"
+new_version="v${major}.${minor}.2-${branch_name}"
 
 # Confirm version name
 read -p "Going to create new git tag: ${new_version}, continue (y/n)? " -n 1 -r
